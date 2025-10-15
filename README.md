@@ -16,6 +16,13 @@ I chose Docker for its simplicity, portability, and reproducibility — ideal fo
 The Wallarm node was configured to inspect incoming traffic, forward clean requests to a backend API, and block malicious requests.  
 I followed the official documentation here: [Wallarm Docker Deployment Guide](https://docs.wallarm.com/installation/inline/compute-instances/docker/nginx-based/)
 
+
+ <p align="center">
+  <img src="screenshots/HLD.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
+
  Example Deployment Command
 
 ```bash
