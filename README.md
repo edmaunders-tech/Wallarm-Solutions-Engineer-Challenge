@@ -34,19 +34,19 @@ This setup allowed me to validate both detection and blocking capabilities using
 
 Before deployment, ensure the following components are available:
 
--Host Environment: Ubuntu 22.04 or similar Linux environment
+- Host Environment: Ubuntu 22.04 or similar Linux environment
 
--Docker: Version 20.x or higher installed and running
+- Docker: Version 20.x or higher installed and running
 
--Wallarm API Token: Active token from the Wallarm Cloud Console
+- Wallarm API Token: Active token from the Wallarm Cloud Console
 
--Backend Application: TicketBox API or httpbin.org reachable at http://127.0.0.1:8080
+- Backend Application: TicketBox API or httpbin.org reachable at http://127.0.0.1:8080
 
--GoTestWAF: Installed to generate and simulate attack traffic
+- GoTestWAF: Installed to generate and simulate attack traffic
 
--Internet Access: Required for Wallarm node registration via audit.api.wallarm.com
+- Internet Access: Required for Wallarm node registration via audit.api.wallarm.com
 
-Deploy Test Backend Application (TicketBox API)
+**Deploy Test Backend Application (TicketBox API)**
 
 To validate that the Wallarm Node correctly forwards and filters traffic, a simple backend API was used — the TicketBox (booking_api) service.
 This Python-based API simulates a real-world backend with endpoints for booking and session handling.
