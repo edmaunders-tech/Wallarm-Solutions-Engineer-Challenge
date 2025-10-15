@@ -214,7 +214,7 @@ After running GoTestWAF, you can verify that the simulated traffic and detected 
 ### 🧩 Step 1: View API Sessions
 
 1. Log in to your Wallarm Console:  
-   - [Audit Cloud](https://us1.my.wallarm.com](https://my.audit.wallarm.com)  
+   - [Audit Cloud](https://my.audit.wallarm.com)  
 
 
 2. Navigate to **Traffic Analysis → API Discovery → Endpoints**.  
