@@ -231,10 +231,14 @@ After running GoTestWAF, you can verify that the simulated traffic and detected 
    - [Audit Cloud](https://my.audit.wallarm.com)  
 
 
-2. Navigate to **Traffic Analysis → API Discovery → Endpoints**.  
+2. Navigate to **Events → API Sessions**.  
 3. Confirm that your backend endpoints (e.g., `/get`, `/login`, `/book`) are visible.  
-   - These were automatically discovered from the traffic sent by GoTestWAF.  
    - Each endpoint should show HTTP methods, request counts, and average response codes.  
+ <p align="center">
+  <img src="screenshots/API-Session.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
 
 This confirms that the **Wallarm Node** successfully forwarded clean requests and recorded legitimate API traffic for analysis.
 
@@ -268,33 +272,6 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
   <br>
 
 </p>
-
----
-
-### 🧠 Validation Outcome
-
-If the deployment was successful:
-- Legitimate traffic from GoTestWAF appears in **API sessions**.
- <p align="center">
-  <img src="screenshots/API-Session.png" alt="Wallarm Node Verification" width="700"/>
-  <br>
-
-</p>
-- Malicious requests appear in **Events / Attacks** with action `Blocked`.  
-- All events are tagged with your node label (`group=ticketbox`).  
-
-
-
-
-This demonstrates that your Wallarm Node is correctly integrated with the Console, registering both **legitimate API sessions** and **blocked malicious attacks**.
-
-
-
-
-
-
-
-
 This confirmed that the Wallarm Node was successfully operating in blocking mode, intercepting and denying the majority of simulated OWASP attacks.
 
 🧠 Troubleshooting Tips
