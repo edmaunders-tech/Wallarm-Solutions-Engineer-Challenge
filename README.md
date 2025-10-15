@@ -205,6 +205,61 @@ Blocked: 241
 Passed: 9
 Detection coverage: 96.4%
 
+## 🔍 Check API Sessions and Attacks in the Wallarm Console
+
+After running GoTestWAF, you can verify that the simulated traffic and detected attacks were correctly processed by your Wallarm Node and appear in the **Wallarm Console**.
+
+---
+
+### 🧩 Step 1: View API Sessions
+
+1. Log in to your Wallarm Console:  
+   - [US Cloud](https://us1.my.wallarm.com)  
+   - [EU Cloud](https://my.wallarm.com)
+
+2. Navigate to **Traffic Analysis → API Discovery → Endpoints**.  
+3. Confirm that your backend endpoints (e.g., `/get`, `/login`, `/book`) are visible.  
+   - These were automatically discovered from the traffic sent by GoTestWAF.  
+   - Each endpoint should show HTTP methods, request counts, and average response codes.  
+
+This confirms that the **Wallarm Node** successfully forwarded clean requests and recorded legitimate API traffic for analysis.
+
+---
+
+### ⚔️ Step 2: Review Detected Attacks
+
+1. In the Console, open **Events → Attacks**.  
+2. Filter by **Source: your Node name or tag (`group=ticketbox`)**.  
+3. You should see multiple attack entries corresponding to the OWASP tests executed by GoTestWAF, such as:  
+   - SQL Injection (`sqli`)  
+   - Cross-Site Scripting (`xss`)  
+   - Remote Code Execution (`rce`)  
+   - Path Traversal (`pthtrv`)  
+   - Command Injection (`cmdi`)  
+
+4. Click on any attack entry to view:  
+   - **Full request and response details**  
+   - **Attack type and risk score**  
+   - **Detection point** (parameter, header, or URI)  
+   - **Blocking status (403)**  
+
+---
+
+### 🧠 Validation Outcome
+
+If the deployment was successful:
+- Legitimate traffic from GoTestWAF appears in **API Discovery / Endpoints**.  
+- Malicious requests appear in **Events / Attacks** with action `Blocked`.  
+- All events are tagged with your node label (`group=ticketbox`).  
+
+This demonstrates that your Wallarm Node is correctly integrated with the Console, registering both **legitimate API sessions** and **blocked malicious attacks**.
+
+
+
+
+
+
+
 
 This confirmed that the Wallarm Node was successfully operating in blocking mode, intercepting and denying the majority of simulated OWASP attacks.
 
@@ -216,6 +271,11 @@ sudo chmod 777 ~/gotestwaf_reports
 Ensure both the backend and Wallarm Node are reachable at 127.0.0.1.
 
 Note: --network host works on Linux; macOS/Windows require alternate networking.
+
+
+
+
+
 
 📖 References
 
