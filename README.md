@@ -119,14 +119,14 @@ docker run -d --name wallarm-node --network host \
 ✅ Step 3: Verify Deployment
 
 Check that the container is running:
-
+```bash
 docker ps
-
+```
 
 View logs to confirm successful registration:
-
+```bash
 docker logs wallarm-node | grep "Wallarm node started"
-
+```
 
 Once registered, you’ll see the node in the Wallarm Console under Configuration → Nodes.
 
