@@ -26,7 +26,7 @@ docker run -d --name wallarm-node --network host \
   -e WALLARM_API_HOST='audit.api.wallarm.com' \
   -e WALLARM_MODE='block' \
   wallarm/node:6.6.0
-
+```
 
 This setup allowed me to validate both detection and blocking capabilities using the GoTestWAF tool, simulating real-world attack traffic against the protected backend.
 
