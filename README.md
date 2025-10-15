@@ -102,17 +102,20 @@ docker run -d --name wallarm-node --network host \
   -e WALLARM_MODE='block' \
   wallarm/node:6.6.0
 
-🧩 Command Breakdown
-Parameter	Description
--d	Runs the container in detached mode (background).
---name wallarm-node	Assigns a friendly name to the container.
---network host	Uses the host’s network stack so Wallarm can inspect traffic directly.
--e WALLARM_API_TOKEN='{API_TOKEN}'	Authenticates the node with Wallarm Cloud.
--e WALLARM_LABELS='group=ticketbox'	Adds metadata tags for node grouping.
--e NGINX_BACKEND='http://127.0.0.1:8080'	Defines the backend server for clean traffic.
--e WALLARM_API_HOST='audit.api.wallarm.com'	Specifies the API endpoint for your region.
--e WALLARM_MODE='block'	Enables blocking mode to deny malicious traffic.
-wallarm/node:6.6.0	The Wallarm Docker image and version.
+### 🧩 Command Breakdown
+
+| Parameter | Description |
+|------------|-------------|
+| `-d` | Runs the container in detached mode (background). |
+| `--name wallarm-node` | Assigns a friendly name to the container. |
+| `--network host` | Uses the host’s network stack so Wallarm can inspect traffic directly. |
+| `-e WALLARM_API_TOKEN='{API_TOKEN}'` | Authenticates the node with Wallarm Cloud. |
+| `-e WALLARM_LABELS='group=ticketbox'` | Adds metadata tags for node grouping. |
+| `-e NGINX_BACKEND='http://127.0.0.1:8080'` | Defines the backend server for clean traffic. |
+| `-e WALLARM_API_HOST='audit.api.wallarm.com'` | Specifies the API endpoint for your region. |
+| `-e WALLARM_MODE='block'` | Enables blocking mode to deny malicious traffic. |
+| `wallarm/node:6.6.0` | The Wallarm Docker image and version. |
+
 ✅ Step 3: Verify Deployment
 
 Check that the container is running:
