@@ -1,4 +1,4 @@
-# 🧩 Wallarm Solutions Engineer Technical Evaluation  
+# Wallarm Solutions Engineer Technical Evaluation  
 **Author:** Ed Maunders  
 **Date:** October 2025  
 **Deployment Method:** Docker (Host Networking)  
@@ -37,7 +37,7 @@ docker run -d --name wallarm-node --network host \
 
 This setup allowed me to validate both detection and blocking capabilities using the GoTestWAF tool, simulating real-world attack traffic against the protected backend.
 
-⚙️ Prerequisites
+**Prerequisites**
 
 Before deployment, ensure the following components are available:
 
@@ -59,7 +59,7 @@ To validate that the Wallarm Node correctly forwards and filters traffic, a simp
 This Python-based API simulates a real-world backend with endpoints for booking and session handling.
 The application should be deployed locally on port 8080, so the Wallarm Node can forward clean traffic directly to it.
 
-🪄 Step 1: Clone and Run the Backend Application
+**Step 1: Clone and Run the Backend Application**
 
 Clone the API from GitHub and start it locally using Docker:
 
@@ -84,7 +84,7 @@ Expected response (example):
   "message": "Backend running and reachable"
 }
 ```
-Deploy Wallarm Filtering Node
+**Deploy Wallarm Filtering Node**
 
 The Wallarm Node was deployed using Docker to inspect incoming HTTP traffic, forward clean requests to the backend API, and block malicious ones.
 
