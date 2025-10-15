@@ -7,7 +7,7 @@
 
 ---
 
-## 🧭 Overview
+## Overview
 
 This project demonstrates the deployment, configuration, and validation of a **Wallarm Filtering Node** using **Docker**.
 
@@ -395,12 +395,3 @@ Confirmed node appeared online in the correct Console (my.audit.wallarm.com → 
 
 
 
-**References**
-
-Wallarm Docker Deployment Docs
-
-Wallarm API Tokens Guide
-
-GoTestWAF Repository
-
-Booking API GitHub Repo
