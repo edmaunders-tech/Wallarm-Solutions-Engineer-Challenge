@@ -101,6 +101,8 @@ Copy the generated API Token — you’ll need this in the next step.
 Run the Wallarm Node container in host networking mode to intercept requests directly.
 Replace {API_TOKEN} with your own from the Wallarm Console.
 
+```bash
+
 docker run -d --name wallarm-node --network host \
   -e WALLARM_API_TOKEN='{API_TOKEN}' \
   -e WALLARM_LABELS='group=ticketbox' \
@@ -108,7 +110,7 @@ docker run -d --name wallarm-node --network host \
   -e WALLARM_API_HOST='audit.api.wallarm.com' \
   -e WALLARM_MODE='block' \
   wallarm/node:6.6.0
-
+```
 ### 🧩 Command Breakdown
 
 | Parameter | Description |
