@@ -235,13 +235,25 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
    - Cross-Site Scripting (`xss`)  
    - Remote Code Execution (`rce`)  
    - Path Traversal (`pthtrv`)  
-   - Command Injection (`cmdi`)  
+   - Command Injection (`cmdi`)
+  
+<p align="center">
+  <img src="screenshots/attacks.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
 
 4. Click on any attack entry to view:  
    - **Full request and response details**  
    - **Attack type and risk score**  
    - **Detection point** (parameter, header, or URI)  
-   - **Blocking status (403)**  
+   - **Blocking status (403)**
+  
+<p align="center">
+  <img src="screenshots/details.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
 
 ---
 
@@ -257,11 +269,7 @@ If the deployment was successful:
 - Malicious requests appear in **Events / Attacks** with action `Blocked`.  
 - All events are tagged with your node label (`group=ticketbox`).  
 
-<p align="center">
-  <img src="screenshots/attacks.png" alt="Wallarm Node Verification" width="700"/>
-  <br>
 
-</p>
 
 
 This demonstrates that your Wallarm Node is correctly integrated with the Console, registering both **legitimate API sessions** and **blocked malicious attacks**.
