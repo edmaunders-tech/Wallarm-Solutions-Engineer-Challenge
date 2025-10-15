@@ -246,9 +246,8 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
 
 ### Step 2: Review Detected Attacks
 
-1. In the Console, open **Events → Attacks**.  
-2. Filter by **Source: your Node name or tag (`group=ticketbox`)**.  
-3. You should see multiple attack entries corresponding to the OWASP tests executed by GoTestWAF, such as:  
+1. In the Console, open **Events → Attacks**.   
+2. You should see multiple attack entries corresponding to the OWASP tests executed by GoTestWAF, such as:  
    - SQL Injection (`sqli`)  
    - Cross-Site Scripting (`xss`)  
    - Remote Code Execution (`rce`)  
@@ -261,7 +260,7 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
 
 </p>
 
-4. Click on any attack entry to view:  
+3. Click on any attack entry to view:  
    - **Full request and response details**  
    - **Attack type and risk score**  
    - **Detection point** (parameter, header, or URI)  
@@ -274,14 +273,6 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
 </p>
 This confirmed that the Wallarm Node was successfully operating in blocking mode, intercepting and denying the majority of simulated OWASP attacks.
 
-🧠 Troubleshooting Tips
-
-If no reports appear, verify directory permissions:
-sudo chmod 777 ~/gotestwaf_reports
-
-Ensure both the backend and Wallarm Node are reachable at 127.0.0.1.
-
-Note: --network host works on Linux; macOS/Windows require alternate networking.
 
 # Summary of Findings
 **Deployment & Configuration**
