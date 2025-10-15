@@ -283,6 +283,49 @@ Ensure both the backend and Wallarm Node are reachable at 127.0.0.1.
 
 Note: --network host works on Linux; macOS/Windows require alternate networking.
 
+Wallarm SE Challenge – Summary of Findings
+🧰 Deployment & Configuration
+
+The Wallarm solution was simple to deploy, offering several flexible deployment options such as Docker, Kubernetes, and the NGINX module.
+For this evaluation, the Docker deployment with host networking was used, enabling traffic inspection with minimal configuration.
+Initial setup, registration, and token authentication completed successfully, and the node connected seamlessly to the Wallarm Cloud Console.
+
+🧭 Console & Usability
+
+The Wallarm Console was intuitive and easy to navigate.
+Dashboards such as Attacks, API Discovery, and Events provided clear visibility into blocked and allowed requests, with detailed payload data for each event.
+Policy configuration and filtering were straightforward, making it easy to investigate results and tune rules.
+
+🧪 Test Execution
+
+GoTestWAF was used to simulate a range of common web attacks against the protected API endpoint.
+A total of 816 tests were executed, covering 41 distinct attack types (including SQLi, RCE, XSS, and Path Traversal).
+
+Metric	Result
+Total Tests	816
+Passed	708
+Failed	5
+Blocked Requests (403)	663
+Allowed Requests (200)	49
+Method Not Allowed (405)	102
+🔒 Detection & Protection
+
+Wallarm effectively blocked approximately 81% of malicious payloads, returning 403 responses for the majority of attacks.
+The small percentage of allowed requests (~6%) indicates potential tuning opportunities for broader rule coverage.
+The presence of 405 responses confirmed that unsupported HTTP methods (such as PUT and DELETE) were also correctly handled.
+
+💡 Overall Assessment
+Strengths
+
+Simple and fast deployment process
+
+Comprehensive coverage of common web attack types
+
+Clear reporting and dashboards for analysis
+
+Accurate blocking with minimal false positives
+
+Effective API Discovery after generating sufficient traffic
 
 
 
