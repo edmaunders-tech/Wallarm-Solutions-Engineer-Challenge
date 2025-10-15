@@ -320,6 +320,78 @@ The presence of 405 responses confirmed that unsupported HTTP methods (such as P
 - Effective API Discovery after generating sufficient traffic
 
 
+# Troubleshooting Wallarm Node Registration
+**Issue Summary**
+
+Initially, the Wallarm node was deployed using a token from the Audit console (https://my.audit.wallarm.com/) but configured to connect to the EMEA cloud endpoint (api.wallarm.com).
+Because tokens are bound to the console region they were generated in, the node could not authenticate with the API and failed to register.
+
+**Observed Symptoms**
+
+After running the node, the container logs showed repeated registration failures:
+```bash
+{"level":"error","component":"register",
+"error":"deployCloudNode: wallarm error in register #7: wapi: PostEx: request [e53dfc4cdd766c597dd6e4f6e4f1dfca]: access denied",
+"time":"2025-10-10T20:29:03Z","message":"node registration done with error"}
+
+{"level":"warn","component":"nginx",
+"message":"wallarm: protection disabled in /etc/nginx/nginx.conf:78"}
+```
+
+and sometimes:
+
+```bash
+wapi: SetApiCredentialsFromRegToken: illegal base64 data at input byte 5
+wapi: PostEx: bad request [], body: <html><h1>405 Not Allowed</h1></html>
+```
+**Root Cause**
+
+These errors indicated that:
+
+The API token was valid, but for a different Wallarm console region.
+
+The node was trying to register against the wrong API host (api.wallarm.com instead of audit.api.wallarm.com).
+
+Because registration never succeeded, the Wallarm engine stayed disabled, showing warnings such as:
+
+```bash
+wallarm: protection disabled
+cannot open proton.db file
+```
+
+The filtering node therefore proxied traffic but did not inspect or block attacks.
+
+**Resolution Steps**
+
+Stopped and removed the old container:
+
+```bash
+docker rm -f wallarm-node
+```
+
+Recreated the node with the correct Console endpoint and token:
+```bash
+docker run -d --name wallarm-node --network host \
+  -e WALLARM_API_TOKEN='<AUDIT_NODE_TOKEN>' \
+  -e WALLARM_API_HOST='audit.api.wallarm.com' \
+  -e WALLARM_LABELS='group=ticketbox' \
+  -e NGINX_BACKEND='http://127.0.0.1:8080' \
+  wallarm/node:6.6.0
+```
+
+**Verified successful registration:**
+```bash
+docker logs -f wallarm-node --tail 50
+
+
+ Output showed:
+
+{"component":"register","message":"node registration start"}
+{"component":"register","message":"node registration done successfully"}
+
+```
+Confirmed node appeared online in the correct Console (my.audit.wallarm.com → Nodes).
+
 
 
 
