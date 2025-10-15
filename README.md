@@ -252,6 +252,13 @@ If the deployment was successful:
 - Malicious requests appear in **Events / Attacks** with action `Blocked`.  
 - All events are tagged with your node label (`group=ticketbox`).  
 
+<p align="center">
+  <img src="screenshots/attacks.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
+
+
 This demonstrates that your Wallarm Node is correctly integrated with the Console, registering both **legitimate API sessions** and **blocked malicious attacks**.
 
 
