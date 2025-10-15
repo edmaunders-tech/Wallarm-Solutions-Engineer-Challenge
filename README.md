@@ -16,7 +16,7 @@ I chose Docker for its simplicity, portability, and reproducibility — ideal fo
 The Wallarm node was configured to inspect incoming traffic, forward clean requests to a backend API, and block malicious requests.  
 I followed the official documentation here: [Wallarm Docker Deployment Guide](https://docs.wallarm.com/installation/inline/compute-instances/docker/nginx-based/)
 
-### Example Deployment Command
+ Example Deployment Command
 
 ```bash
 docker run -d --name wallarm-node --network host \
@@ -147,13 +147,13 @@ Running GoTestWAF in a Docker container keeps the environment clean and avoids t
 🪄 Step 1: Download the GoTestWAF Docker Image
 
 Pull the latest GoTestWAF image from Docker Hub:
-
+```bash
 docker pull wallarm/gotestwaf
-
+```
 ⚙️ Step 2: Run GoTestWAF
 
 Execute the following command to start the test and generate reports:
-
+```bash
 docker run --rm --network host -u 0:0 \
   -v ~/gotestwaf_reports:/app/reports \
   wallarm/gotestwaf \
@@ -161,6 +161,7 @@ docker run --rm --network host -u 0:0 \
   --noEmailReport \
   --blockStatusCodes=403 \
   --testSet owasp
+```
 
 ### 🧩 Command Breakdown
 
@@ -180,9 +181,10 @@ docker run --rm --network host -u 0:0 \
 
 Check the reports generated on your host:
 
+```bash
 ls -lh ~/gotestwaf_reports
 
-
+```
 Typical output:
 
 waf-evaluation-report-2025-October-13-12-42-47.pdf
