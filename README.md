@@ -47,7 +47,7 @@ Before deployment, ensure the following components are available:
 
 - Wallarm API Token: Active token from the Wallarm Cloud Console
 
-- Backend Application: TicketBox API or httpbin.org reachable at http://127.0.0.1:8080
+- Backend Application: TicketBox API reachable at http://127.0.0.1:8080
 
 - GoTestWAF: Installed to generate and simulate attack traffic
 
