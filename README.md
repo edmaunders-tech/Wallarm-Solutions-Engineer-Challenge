@@ -64,7 +64,7 @@ The application should be deployed locally on port 8080, so the Wallarm Node can
 Clone the API from GitHub and start it locally using Docker:
 
 ```bash
-git clone https://github.com/edmaunders/booking_api.git
+git clone https://github.com/edmaunders-tech/booking_api.git
 cd booking_api
 docker build -t booking_api .
 docker run -d --name booking_api -p 8080:8080 booking_api
