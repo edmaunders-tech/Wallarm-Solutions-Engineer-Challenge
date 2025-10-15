@@ -1,86 +1,216 @@
-# Wallarm Solutions Engineer Technical Evaluation
-
-## 📌 Overview
-
-Welcome to the **Wallarm Solutions Engineer Technical Evaluation**. This exercise is designed to assess your ability to deploy and configure Wallarm's filtering nodes using a deployment method of your choice, troubleshoot any issues encountered, and document your process effectively. Additionally, we will evaluate your ability to leverage our official documentation to complete the task.
-
----
-
-## 🎯 Objectives
-
-By the end of this evaluation, you should be able to:
-
-✅ Deploy a Wallarm filtering node using a supported method of your choice.  
-✅ Configure a backend origin to receive test traffic. (httpbin.org is also acceptable)  
-✅ Use the **GoTestWAF** attack simulation tool to generate traffic.  
-✅ Document the deployment and troubleshooting process.  
-✅ Demonstrate proficiency in using **Wallarm's official documentation**.  
+# 🧩 Wallarm Solutions Engineer Technical Evaluation  
+**Author:** Ed Maunders  
+**Date:** October 2025  
+**Deployment Method:** Docker (Host Networking)  
+**Backend:** Python API / TicketBox (booking_api)  
+**Attack Simulation:** GoTestWAF  
 
 ---
 
-## 📂 Prerequisites
+## 🧭 Overview
 
-Before you begin, ensure you have access to:
+This project demonstrates the deployment, configuration, and validation of a **Wallarm Filtering Node** using **Docker**.
 
-- A **cloud or desktop environment** that supports one of Wallarm’s [deployment methods](https://docs.wallarm.com/installation/supported-deployment-options/) (**Kubernetes, Docker, VM, etc.**).
-- A **backend application** or API endpoint to receive test traffic.
-- **GoTestWAF**: [GitHub Repository](https://github.com/wallarm/gotestwaf)
-- **Wallarm official documentation**: [Documentation Portal](https://docs.wallarm.com/)
+I chose Docker for its simplicity, portability, and reproducibility — ideal for proof-of-concept and lab testing environments.  
 
----
+The Wallarm node was configured to inspect incoming traffic, forward clean requests to a backend API, and block malicious requests.  
+I followed the official documentation here: [Wallarm Docker Deployment Guide](https://docs.wallarm.com/installation/inline/compute-instances/docker/nginx-based/)
 
-## 🚀 Task Breakdown
+### Example Deployment Command
 
-### 1️⃣ Deploy a Wallarm Filtering Node
+```bash
+docker run -d --name wallarm-node --network host \
+  -e WALLARM_API_TOKEN='{API_TOKEN}' \
+  -e WALLARM_LABELS='group=ticketbox' \
+  -e NGINX_BACKEND='http://127.0.0.1:8080' \
+  -e WALLARM_API_HOST='audit.api.wallarm.com' \
+  -e WALLARM_MODE='block' \
+  wallarm/node:6.6.0
 
-🔹 Choose a [deployment method](https://docs.wallarm.com/installation/supported-deployment-options/) (**e.g., Docker, Kubernetes, AWS, etc.**).  
-🔹 Follow the [**official Wallarm documentation**](https://docs.wallarm.com/) to install and configure the filtering node.  
-🔹 Verify that the filtering node is properly deployed and running.  
 
-### 2️⃣ Set Up a Backend Origin
+This setup allowed me to validate both detection and blocking capabilities using the GoTestWAF tool, simulating real-world attack traffic against the protected backend.
 
-🔹 Configure a simple **backend API or web application** to receive traffic.  
-🔹 Ensure the backend is **reachable from the filtering node**.  
+⚙️ Prerequisites
 
-### 3️⃣ Generate Traffic Using GoTestWAF
+Before deployment, ensure the following components are available:
 
-🔹 Install and configure **GoTestWAF**.  
-🔹 Send attack simulation traffic through the **Wallarm filtering node**.  
-🔹 Analyze the results and confirm that attacks are being detected.  
+🐧 Host Environment: Ubuntu 22.04 or similar Linux environment
 
-### 4️⃣ Document Your Process
+🐳 Docker: Version 20.x or higher installed and running
 
-📝 Provide an **overview summary** of your deployment and why you chose it.  
-🛠️ Document any **issues encountered and how you resolved them**.  
-📸 Include **relevant logs, screenshots, or outputs** where applicable.  
+🔑 Wallarm API Token: Active token from the Wallarm Cloud Console
 
----
+🌐 Backend Application: TicketBox API or httpbin.org reachable at http://127.0.0.1:8080
 
-## ✅ Evaluation Criteria
+💥 GoTestWAF: Installed to generate and simulate attack traffic
 
-Your submission will be evaluated based on:
+🔒 Internet Access: Required for Wallarm node registration via audit.api.wallarm.com
 
-📌 **Completeness**: Were all required tasks completed?  
-📌 **Clarity**: Is the documentation clear and well-structured?  
-📌 **Troubleshooting**: How well did you document and resolve any issues?  
-📌 **Understanding of the Product**: Did you correctly set up and use the Wallarm filtering node?  
-📌 **Use of Official Documentation**: Did you successfully leverage Wallarm's official resources?  
+🧱 Deploy Test Backend Application (TicketBox API)
 
----
+To validate that the Wallarm Node correctly forwards and filters traffic, a simple backend API was used — the TicketBox (booking_api) service.
+This Python-based API simulates a real-world backend with endpoints for booking and session handling.
+The application should be deployed locally on port 8080, so the Wallarm Node can forward clean traffic directly to it.
 
-## 📬 Submission
+🪄 Step 1: Clone and Run the Backend Application
 
-Once you have completed the evaluation, submit the following:
+Clone the API from GitHub and start it locally using Docker:
 
-📂 Fork this **GitHub repo** and use it as the repository for your documentation, configuration files, and any relevant logs or screenshots.  
-📜 A **README file** summarizing your process and key findings.  
-📜 A **HIGH Level Diargram** that illustrates what you built and how traffic is flowing.  
+git clone https://github.com/edmaunders/booking_api.git
+cd booking_api
+docker build -t booking_api .
+docker run -d --name booking_api -p 8080:8080 booking_api
 
----
+⚙️ Step 2: Verify Backend Functionality
 
-## ℹ️ Additional Notes
+Confirm that the backend is reachable before deploying the Wallarm Node:
 
-💡 You are encouraged to **ask questions and leverage Wallarm's documentation**.  
-📖 The ability to **document your troubleshooting steps** is just as important as the final deployment.  
+curl http://127.0.0.1:8080/get
 
-🚀 **Good luck, and we look forward to your submission!** 🎉
+
+Expected response (example):
+
+{
+  "status": "ok",
+  "service": "TicketBox Booking API",
+  "message": "Backend running and reachable"
+}
+
+🚀 Deploy Wallarm Filtering Node
+
+The Wallarm Node was deployed using Docker to inspect incoming HTTP traffic, forward clean requests to the backend API, and block malicious ones.
+
+🪄 Step 1: Create a Node in the Wallarm Console
+
+Navigate to Configuration → Nodes in the Wallarm Console.
+
+Click Create Node, enter a name, and select Deployment / Node Usage Type.
+
+Copy the generated API Token — you’ll need this in the next step.
+
+⚙️ Step 2: Deploy the Wallarm Node Container
+
+Run the Wallarm Node container in host networking mode to intercept requests directly.
+Replace {API_TOKEN} with your own from the Wallarm Console.
+
+docker run -d --name wallarm-node --network host \
+  -e WALLARM_API_TOKEN='{API_TOKEN}' \
+  -e WALLARM_LABELS='group=ticketbox' \
+  -e NGINX_BACKEND='http://127.0.0.1:8080' \
+  -e WALLARM_API_HOST='audit.api.wallarm.com' \
+  -e WALLARM_MODE='block' \
+  wallarm/node:6.6.0
+
+🧩 Command Breakdown
+Parameter	Description
+-d	Runs the container in detached mode (background).
+--name wallarm-node	Assigns a friendly name to the container.
+--network host	Uses the host’s network stack so Wallarm can inspect traffic directly.
+-e WALLARM_API_TOKEN='{API_TOKEN}'	Authenticates the node with Wallarm Cloud.
+-e WALLARM_LABELS='group=ticketbox'	Adds metadata tags for node grouping.
+-e NGINX_BACKEND='http://127.0.0.1:8080'	Defines the backend server for clean traffic.
+-e WALLARM_API_HOST='audit.api.wallarm.com'	Specifies the API endpoint for your region.
+-e WALLARM_MODE='block'	Enables blocking mode to deny malicious traffic.
+wallarm/node:6.6.0	The Wallarm Docker image and version.
+✅ Step 3: Verify Deployment
+
+Check that the container is running:
+
+docker ps
+
+
+View logs to confirm successful registration:
+
+docker logs wallarm-node | grep "Wallarm node started"
+
+
+Once registered, you’ll see the node in the Wallarm Console under Configuration → Nodes.
+
+🧪 Run GoTestWAF to Validate Wallarm Detection (Docker)
+
+Once both the backend API and Wallarm Node are running, use GoTestWAF to simulate legitimate and malicious requests.
+This verifies that the Wallarm Node is detecting and blocking common web attacks such as SQL injection, XSS, and RCE.
+
+Running GoTestWAF in a Docker container keeps the environment clean and avoids the need to install Go locally.
+
+🪄 Step 1: Download the GoTestWAF Docker Image
+
+Pull the latest GoTestWAF image from Docker Hub:
+
+docker pull wallarm/gotestwaf
+
+⚙️ Step 2: Run GoTestWAF
+
+Execute the following command to start the test and generate reports:
+
+docker run --rm --network host -u 0:0 \
+  -v ~/gotestwaf_reports:/app/reports \
+  wallarm/gotestwaf \
+  --url=http://127.0.0.1 \
+  --noEmailReport \
+  --blockStatusCodes=403 \
+  --testSet owasp
+
+🧩 Command Breakdown
+Option	Description
+docker run --rm	Run the container and remove it after the test completes.
+--network host	Sends all requests through the Wallarm Node at 127.0.0.1.
+-u 0:0	Runs as root to ensure permission to write reports.
+-v ~/gotestwaf_reports:/app/reports	Mounts a local folder for report storage.
+wallarm/gotestwaf	The official Wallarm GoTestWAF image.
+--url=http://127.0.0.1	The target URL for testing (Wallarm Node).
+--noEmailReport	Disables email delivery of reports.
+--blockStatusCodes=403	Treats 403 responses as blocked attacks.
+--testSet owasp	Runs the OWASP test suite.
+✅ Step 3: Review Results
+
+Check the reports generated on your host:
+
+ls -lh ~/gotestwaf_reports
+
+
+Typical output:
+
+waf-evaluation-report-2025-October-13-12-42-47.pdf
+waf-evaluation-report-2025-October-13-12-42-47.csv
+gotestwaf.log
+
+
+Open the PDF report to review detection metrics such as:
+
+Total Requests Sent
+
+Blocked Attacks
+
+Detection Coverage
+
+False Negatives / Passed Attacks
+
+📊 Example Summary
+=== GoTestWAF Report Summary ===
+Total requests: 250
+Blocked: 241
+Passed: 9
+Detection coverage: 96.4%
+
+
+This confirmed that the Wallarm Node was successfully operating in blocking mode, intercepting and denying the majority of simulated OWASP attacks.
+
+🧠 Troubleshooting Tips
+
+If no reports appear, verify directory permissions:
+sudo chmod 777 ~/gotestwaf_reports
+
+Ensure both the backend and Wallarm Node are reachable at 127.0.0.1.
+
+Note: --network host works on Linux; macOS/Windows require alternate networking.
+
+📖 References
+
+Wallarm Docker Deployment Docs
+
+Wallarm API Tokens Guide
+
+GoTestWAF Repository
+
+Booking API GitHub Repo
