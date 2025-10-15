@@ -129,6 +129,12 @@ Check that the container is running:
 ```bash
 docker ps
 ```
+ <p align="center">
+  <img src="screenshots/docker-ps.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
+
 
 View logs to confirm successful registration:
 ```bash
