@@ -84,11 +84,11 @@ Expected response (example):
   "message": "Backend running and reachable"
 }
 ```
-🚀 Deploy Wallarm Filtering Node
+Deploy Wallarm Filtering Node
 
 The Wallarm Node was deployed using Docker to inspect incoming HTTP traffic, forward clean requests to the backend API, and block malicious ones.
 
-🪄 Step 1: Create a Node in the Wallarm Console
+ Step 1: Create a Node in the Wallarm Console
 
 Navigate to Configuration → Nodes in the Wallarm Console.
 
@@ -96,7 +96,7 @@ Click Create Node, enter a name, and select Deployment / Node Usage Type.
 
 Copy the generated API Token — you’ll need this in the next step.
 
-⚙️ Step 2: Deploy the Wallarm Node Container
+ Step 2: Deploy the Wallarm Node Container
 
 Run the Wallarm Node container in host networking mode to intercept requests directly.
 Replace {API_TOKEN} with your own from the Wallarm Console.
@@ -111,7 +111,7 @@ docker run -d --name wallarm-node --network host \
   -e WALLARM_MODE='block' \
   wallarm/node:6.6.0
 ```
-### 🧩 Command Breakdown
+### Command Breakdown
 
 | Parameter | Description |
 |------------|-------------|
@@ -125,7 +125,7 @@ docker run -d --name wallarm-node --network host \
 | `-e WALLARM_MODE='block'` | Enables blocking mode to deny malicious traffic. |
 | `wallarm/node:6.6.0` | The Wallarm Docker image and version. |
 
-✅ Step 3: Verify Deployment
+**Step 3: Verify Deployment**
 
 Check that the container is running:
 ```bash
@@ -152,7 +152,7 @@ Once registered, you’ll see the node in the Wallarm Console under Configuratio
 </p>
 
 
-##Run GoTestWAF to Validate Wallarm Detection (Docker)
+##Run GoTestWAF to Validate Wallarm Detection (Docker)##
 
 Once both the backend API and Wallarm Node are running, use GoTestWAF to simulate legitimate and malicious requests.
 This verifies that the Wallarm Node is detecting and blocking common web attacks such as SQL injection, XSS, and RCE.
@@ -192,7 +192,7 @@ docker run --rm --network host -u 0:0 \
 | `--blockStatusCodes=403` | Treats HTTP 403 responses as blocked attacks. |
 | `--testSet owasp` | Runs the OWASP Core test suite (SQLi, XSS, RCE, etc.). |
 
-Step 3: Review Results
+**Step 3: Review Results**
 
 Check the reports generated on your host:
 
@@ -225,7 +225,7 @@ After running GoTestWAF, you can verify that the simulated traffic and detected 
 
 ---
 
-### 🧩 Step 1: View API Sessions
+### Step 1: View API Sessions
 
 1. Log in to your Wallarm Console:  
    - [Audit Cloud](https://my.audit.wallarm.com)  
@@ -323,7 +323,7 @@ The presence of 405 responses confirmed that unsupported HTTP methods (such as P
 
 
 
-📖 References
+**References**
 
 Wallarm Docker Deployment Docs
 
