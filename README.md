@@ -130,6 +130,13 @@ docker logs wallarm-node | grep "Wallarm node started"
 
 Once registered, you’ll see the node in the Wallarm Console under Configuration → Nodes.
 
+<p align="center">
+  <img src="screenshots/Screenshot%202025-10-15%20at%2012.48.00.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
+
+
 🧪 Run GoTestWAF to Validate Wallarm Detection (Docker)
 
 Once both the backend API and Wallarm Node are running, use GoTestWAF to simulate legitimate and malicious requests.
