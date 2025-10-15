@@ -392,6 +392,11 @@ docker logs -f wallarm-node --tail 50
 ```
 Confirmed node appeared online in the correct Console (my.audit.wallarm.com → Nodes).
 
+# Test Artifacts & Reports
 
+The detailed GoTestWAF reports are included below:
 
+- [📄 PDF Report – waf-evaluation-report-2025-October-15-13-01-54.pdf](reports/waf-evaluation-report-2025-October-15-13-01-54.pdf)
+- [📊 CSV Report – waf-evaluation-report-2025-October-15-13-01-54.csv](reports/waf-evaluation-report-2025-October-15-13-01-54.csv)
 
+These files contain the complete results of the OWASP Core test set, including response codes, blocked requests, and detection metrics used to calculate the figures in the summary table.
