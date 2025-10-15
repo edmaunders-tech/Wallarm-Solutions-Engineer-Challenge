@@ -162,17 +162,20 @@ docker run --rm --network host -u 0:0 \
   --blockStatusCodes=403 \
   --testSet owasp
 
-🧩 Command Breakdown
-Option	Description
-docker run --rm	Run the container and remove it after the test completes.
---network host	Sends all requests through the Wallarm Node at 127.0.0.1.
--u 0:0	Runs as root to ensure permission to write reports.
--v ~/gotestwaf_reports:/app/reports	Mounts a local folder for report storage.
-wallarm/gotestwaf	The official Wallarm GoTestWAF image.
---url=http://127.0.0.1	The target URL for testing (Wallarm Node).
---noEmailReport	Disables email delivery of reports.
---blockStatusCodes=403	Treats 403 responses as blocked attacks.
---testSet owasp	Runs the OWASP test suite.
+### 🧩 Command Breakdown
+
+| Option | Description |
+|---------|-------------|
+| `docker run --rm` | Runs the container and removes it automatically after the test completes. |
+| `--network host` | Sends all requests through the Wallarm Node at `127.0.0.1`. |
+| `-u 0:0` | Runs as root to ensure permissions for writing report files. |
+| `-v ~/gotestwaf_reports:/app/reports` | Mounts a local folder on the host to store generated reports. |
+| `wallarm/gotestwaf` | The official Wallarm GoTestWAF Docker image. |
+| `--url=http://127.0.0.1` | Sets the target URL for testing (the Wallarm Node in blocking mode). |
+| `--noEmailReport` | Disables email delivery of the report (useful for local testing). |
+| `--blockStatusCodes=403` | Treats HTTP 403 responses as blocked attacks. |
+| `--testSet owasp` | Runs the OWASP Core test suite (SQLi, XSS, RCE, etc.). |
+
 ✅ Step 3: Review Results
 
 Check the reports generated on your host:
