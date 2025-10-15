@@ -183,14 +183,10 @@ Check the reports generated on your host:
 
 ```bash
 ls -lh ~/gotestwaf_reports
-
-```
-Typical output:
-
 waf-evaluation-report-2025-October-13-12-42-47.pdf
 waf-evaluation-report-2025-October-13-12-42-47.csv
 gotestwaf.log
-
+```
 
 Open the PDF report to review detection metrics such as:
 
