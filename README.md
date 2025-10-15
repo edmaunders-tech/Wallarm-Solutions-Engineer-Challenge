@@ -198,12 +198,11 @@ Detection Coverage
 
 False Negatives / Passed Attacks
 
-📊 Example Summary
-=== GoTestWAF Report Summary ===
-Total requests: 250
-Blocked: 241
-Passed: 9
-Detection coverage: 96.4%
+<p align="center">
+  <img src="screenshots/report.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
 
 ## 🔍 Check API Sessions and Attacks in the Wallarm Console
 
