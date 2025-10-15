@@ -248,7 +248,12 @@ This confirms that the **Wallarm Node** successfully forwarded clean requests an
 ### 🧠 Validation Outcome
 
 If the deployment was successful:
-- Legitimate traffic from GoTestWAF appears in **API Discovery / Endpoints**.  
+- Legitimate traffic from GoTestWAF appears in **API sessions**.
+ <p align="center">
+  <img src="screenshots/API-Session.png" alt="Wallarm Node Verification" width="700"/>
+  <br>
+
+</p>
 - Malicious requests appear in **Events / Attacks** with action `Blocked`.  
 - All events are tagged with your node label (`group=ticketbox`).  
 
